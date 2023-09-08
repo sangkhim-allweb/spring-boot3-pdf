@@ -21,7 +21,6 @@ public class PdfController {
 
   @GetMapping("/v1/pdf/write-text")
   public ResponseEntity<Void> writeText() throws DocumentException, FileNotFoundException {
-
     service.writeText();
     return new ResponseEntity<>(HttpStatus.OK);
   }
@@ -39,6 +38,12 @@ public class PdfController {
       throws DocumentException, IOException, URISyntaxException {
 
     service.writeTable();
+    return new ResponseEntity<>(HttpStatus.OK);
+  }
+
+  @GetMapping("/v1/pdf/stamper")
+  public ResponseEntity<Void> stamper() throws DocumentException, IOException {
+    service.stamper();
     return new ResponseEntity<>(HttpStatus.OK);
   }
 }

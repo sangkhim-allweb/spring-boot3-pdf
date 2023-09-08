@@ -12,6 +12,8 @@ import com.itextpdf.text.Image;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.PdfStamper;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -64,6 +66,16 @@ public class PdfService {
 
     document.add(table);
     document.close();
+  }
+
+  public void stamper() throws IOException, DocumentException {
+    PdfReader pdfReader = new PdfReader("iTextHelloWorld.pdf");
+    PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream("encryptedPdf.pdf"));
+
+    pdfStamper.setEncryption(
+        "userpass".getBytes(), "ownerpass".getBytes(), 0, PdfWriter.ENCRYPTION_AES_256);
+
+    pdfStamper.close();
   }
 
   private void addTableHeader(PdfPTable table) {
